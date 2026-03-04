@@ -1,28 +1,15 @@
 import Link from "next/link";
 import BlogGrid from "@/components/BlogGrid";
-import { getAllReviewSummaries } from "@/lib/reviews";
+import { getAllProviderSummaries } from "@/lib/instagram-providers";
 
 export const metadata = {
   title: "Honest Reviews | Fanzsocial",
   description:
-    "Straightforward reviews of social media tools, platforms, and services. We share what works, what falls short, and whether it's worth your time.",
+    "Honest reviews of the best platforms to buy Instagram followers, YouTube subscribers, and more. We test and rank services so you can choose with confidence.",
 };
 
-function formatDate(date?: string) {
-  if (!date) return "";
-  try {
-    return new Date(date).toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return String(date);
-  }
-}
-
 export default function ReviewsPage() {
-  const posts = getAllReviewSummaries();
+  const posts = getAllProviderSummaries();
   const estDate = new Date().toLocaleString("en-US", {
     timeZone: "America/New_York",
     year: "numeric",
@@ -58,7 +45,7 @@ export default function ReviewsPage() {
 
             {/* Description */}
             <h2 className="text-gray-600 text-lg font-normal leading-normal max-w-2xl text-balance">
-              Our straightforward reviews of social media tools, platforms, and services. We share what works, what falls short, and whether it's worth your time.
+              Reviews of the best platforms to buy Instagram likes, YouTube followers, and more. We test each service and share what works and what doesn&apos;t.
             </h2>
 
             {/* Meta row */}

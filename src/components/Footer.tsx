@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaTiktok, FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
+import { FaReddit } from "react-icons/fa6";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -28,10 +28,10 @@ export default function Footer() {
     <footer className="relative mt-8">
       <div className="w-full max-w-[87.5rem] mx-auto">
         <div className="rounded-2xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm px-6 md:px-8 py-6">
-          {/* Mobile: Logo + Social Icons row | Desktop: Logo left, Nav centered, Social right */}
+          {/* Mobile: Logo, Nav, Reddit | Desktop: Logo left, Nav centered, Reddit right */}
           <div className="flex flex-col md:flex-row md:relative gap-5 md:gap-6 items-start md:items-center">
-            {/* Logo and Social Icons Row for Mobile */}
-            <div className="flex w-full md:w-auto items-center justify-between md:justify-start">
+            {/* Logo */}
+            <div className="flex w-full md:w-auto items-center justify-start">
               <Link 
                 href="/" 
                 onClick={(e) => handleNavClick(e, "/")}
@@ -51,13 +51,6 @@ export default function Footer() {
                 </div>
                 <span className="text-base font-bold tracking-tight">Fanzsocial</span>
               </Link>
-              {/* Social Icons - visible on mobile, hidden on desktop (shown in main row) */}
-              <div className="flex items-center gap-3 text-gray-500 md:hidden">
-                <a aria-label="TikTok" className="hover:text-primary transition-colors" href="#"><FaTiktok /></a>
-                <a aria-label="Instagram" className="hover:text-primary transition-colors" href="#"><FaInstagram /></a>
-                <a aria-label="YouTube" className="hover:text-primary transition-colors" href="#"><FaYoutube /></a>
-                <a aria-label="X" className="hover:text-primary transition-colors" href="#"><FaXTwitter /></a>
-              </div>
             </div>
             {/* Navigation Links - Desktop: Centered */}
             <nav className="flex flex-wrap items-center gap-0.5 md:gap-1.5 rounded-full border border-gray-200 bg-white/80 p-1 md:p-1.5 backdrop-blur-sm shadow-sm md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
@@ -70,10 +63,10 @@ export default function Footer() {
               </Link>
               <Link 
                 className="text-slate-800 text-sm font-medium leading-normal hover:bg-gray-100 transition-colors px-2 md:px-4 py-1.5 rounded-full" 
-                href="/blog"
-                onClick={(e) => handleNavClick(e, "/blog")}
+                href="/buy-instagram-likes-followers"
+                onClick={(e) => handleNavClick(e, "/buy-instagram-likes-followers")}
               >
-                Blog
+                Instagram Likes
               </Link>
               <Link 
                 className="text-slate-800 text-sm font-medium leading-normal hover:bg-gray-100 transition-colors px-2 md:px-4 py-1.5 rounded-full" 
@@ -82,20 +75,23 @@ export default function Footer() {
               >
                 Reviews
               </Link>
-              <Link 
-                className="text-slate-800 text-sm font-medium leading-normal hover:bg-gray-100 transition-colors px-2 md:px-4 py-1.5 rounded-full" 
-                href="/comparisons"
-                onClick={(e) => handleNavClick(e, "/comparisons")}
-              >
-                Comparisons
-              </Link>
             </nav>
-            {/* Social Icons - Desktop: Right side */}
-            <div className="hidden md:flex items-center gap-3 text-gray-500 ml-auto">
-              <a aria-label="TikTok" className="hover:text-primary transition-colors" href="#"><FaTiktok /></a>
-              <a aria-label="Instagram" className="hover:text-primary transition-colors" href="#"><FaInstagram /></a>
-              <a aria-label="YouTube" className="hover:text-primary transition-colors" href="#"><FaYoutube /></a>
-              <a aria-label="X" className="hover:text-primary transition-colors" href="#"><FaXTwitter /></a>
+            {/* Reddit community block */}
+            <div className="flex flex-col w-full md:w-auto md:max-w-[280px] md:ml-auto rounded-xl border border-gray-200 bg-gray-50/80 p-4 border-l-4 border-l-[#FF4500]">
+              <FaReddit className="w-8 h-8 text-[#FF4500] flex-shrink-0" aria-hidden />
+              <h3 className="text-sm font-semibold text-gray-900 mt-2">Join our community</h3>
+              <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                Connect with creators and brands on Reddit. Share tips, ask questions, and stay in the loop with r/FanzSocial.
+              </p>
+              <a
+                href="https://www.reddit.com/r/FanzSocial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit r/FanzSocial on Reddit"
+                className="mt-3 inline-flex items-center justify-center rounded-full border-2 border-[#FF4500] px-4 py-2 text-sm font-medium text-[#FF4500] hover:bg-[#FF4500] hover:text-white transition-colors w-fit"
+              >
+                Visit r/FanzSocial
+              </a>
             </div>
           </div>
           {/* Privacy Policy and Terms of Service - Mobile only */}

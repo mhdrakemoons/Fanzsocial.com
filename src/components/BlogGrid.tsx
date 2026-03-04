@@ -42,7 +42,7 @@ export default function BlogGrid({ posts, pageSize = 9, hrefBase = "/blog" }: Bl
                   {/* Gradient overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                   {/* Rating badge with star in top left */}
-                  {hrefBase === "/reviews" && post.rating !== undefined && (
+                  {(hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers") && post.rating !== undefined && (
                     <div className="absolute top-3 left-3 flex items-center space-x-1 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 z-10">
                       <svg className="w-3 h-3 text-yellow-400 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
@@ -51,7 +51,7 @@ export default function BlogGrid({ posts, pageSize = 9, hrefBase = "/blog" }: Bl
                     </div>
                   )}
                   {/* Pricing badge in bottom right */}
-                  {hrefBase === "/reviews" && post.pricing && post.pricing.trim() !== "" && (
+                  {(hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers") && post.pricing && post.pricing.trim() !== "" && (
                     <div className="absolute bottom-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded z-10">
                       {post.pricing}
                     </div>
@@ -61,7 +61,7 @@ export default function BlogGrid({ posts, pageSize = 9, hrefBase = "/blog" }: Bl
                 <div className="h-[200px] bg-gray-100 relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                   {/* Rating badge with star in top left */}
-                  {hrefBase === "/reviews" && post.rating !== undefined && (
+                  {(hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers") && post.rating !== undefined && (
                     <div className="absolute top-3 left-3 flex items-center space-x-1 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 z-10">
                       <svg className="w-3 h-3 text-yellow-400 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
@@ -70,22 +70,22 @@ export default function BlogGrid({ posts, pageSize = 9, hrefBase = "/blog" }: Bl
                     </div>
                   )}
                   {/* Pricing badge in bottom right */}
-                  {hrefBase === "/reviews" && post.pricing && post.pricing.trim() !== "" && (
+                  {(hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers") && post.pricing && post.pricing.trim() !== "" && (
                     <div className="absolute bottom-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded z-10">
                       {post.pricing}
                     </div>
                   )}
                 </div>
               )}
-              {post.badge && hrefBase !== "/reviews" ? (
+              {post.badge && hrefBase !== "/reviews" && hrefBase !== "/buy-instagram-likes-followers" ? (
                 <span className={`absolute top-3 left-3 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${post.badgeClass ?? "bg-primary text-white"} z-10`}>{post.badge}</span>
               ) : null}
             </div>
             <div className="p-6 flex-grow flex flex-col">
               <h3 className="text-[#111827] font-bold text-lg leading-tight group-hover:text-primary transition-colors text-left">{post.title}</h3>
               <p className="text-gray-600 text-sm mt-1 line-clamp-2 text-left">{post.excerpt}</p>
-              {/* Pros and Cons for reviews */}
-              {hrefBase === "/reviews" && (
+              {/* Pros and Cons for reviews and Instagram providers */}
+              {(hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers") && (
                 <div className="mt-4 space-y-3">
                   {post.pros && post.pros.length > 0 && (
                     <div>
@@ -114,10 +114,20 @@ export default function BlogGrid({ posts, pageSize = 9, hrefBase = "/blog" }: Bl
                 </div>
               )}
             </div>
-            <div className="px-6 py-4 border-t border-gray-100 bg-blue-50 group-hover:bg-blue-100 transition-colors text-left">
-              <span className="text-sm font-medium text-blue-600">
-                {hrefBase === "/reviews" ? "Read full review" : "Read article"}
-              </span>
+            <div
+              className={`border-t border-gray-100 text-left ${
+                hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers"
+                  ? "px-6 py-4"
+                  : "px-6 py-4 bg-blue-50 group-hover:bg-blue-100 transition-colors"
+              }`}
+            >
+              {(hrefBase === "/reviews" || hrefBase === "/buy-instagram-likes-followers") ? (
+                <span className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white shadow-sm transition-all group-hover:bg-primary/90">
+                  View full review
+                </span>
+              ) : (
+                <span className="text-sm font-medium text-blue-600">Read article</span>
+              )}
             </div>
           </Link>
         ))}

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   const provider = await getProviderBySlug(slug);
   if (!provider) return {};
   return {
-    title: `${provider.title} — Fanzsocial Reviews`,
+    title: `${provider.title} | Fanzsocial`,
     description: provider.excerpt,
     openGraph: {
       title: provider.title,
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   };
 }
 
-export default async function ReviewPage({ params }: { params: Promise<PageParams> }) {
+export default async function ProviderPage({ params }: { params: Promise<PageParams> }) {
   const { slug } = await params;
   const provider = await getProviderBySlug(slug);
   if (!provider) notFound();
@@ -54,10 +54,10 @@ export default async function ReviewPage({ params }: { params: Promise<PageParam
             </Link>
             <span className="text-[#4A236C]">/</span>
             <Link
-              href="/reviews"
+              href="/buy-instagram-likes-followers"
               className="text-[#4A236C] hover:text-[#4A236C]/80 transition-colors"
             >
-              Reviews
+              Buy Instagram Likes & Followers
             </Link>
             <span className="text-[#4A236C]">/</span>
             <span className="text-[#4A236C] font-medium">{provider.title}</span>
