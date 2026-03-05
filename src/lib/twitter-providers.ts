@@ -5,10 +5,9 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { getCommonRemarkPlugins, type TocHeading } from "@/lib/markdown";
 import { reviewMdxComponents } from "@/components/Reviews/ReviewMDXComponents";
 
-const PROVIDERS_DIR = path.join(process.cwd(), "src", "content", "instagram-providers");
+const PROVIDERS_DIR = path.join(process.cwd(), "src", "content", "twitter-providers");
 
-// Fixed display order: 1st SocialLads, 2nd Buzzoid, 3rd SocialKing
-const PROVIDER_ORDER = ["sociallads", "buzzoid", "socialking"];
+const PROVIDER_ORDER = ["useviral", "twesocial", "followersup"];
 
 export type ProviderFrontmatter = {
   title: string;
@@ -71,25 +70,19 @@ function readFile(slugOrFile: string): { filePath: string; raw: string } {
   } else {
     filePath = findFileForSlug(slugOrFile);
   }
-  if (!filePath) {
-    throw new Error(`Provider not found: ${slugOrFile}`);
-  }
+  if (!filePath) throw new Error(`Provider not found: ${slugOrFile}`);
   const raw = fs.readFileSync(filePath, "utf8");
   return { filePath, raw };
 }
 
 export function getAllProviderFiles(): string[] {
   if (!fs.existsSync(PROVIDERS_DIR)) return [];
-  return fs
-    .readdirSync(PROVIDERS_DIR)
-    .filter((f) => f.endsWith(".mdx"))
-    .sort();
+  return fs.readdirSync(PROVIDERS_DIR).filter((f) => f.endsWith(".mdx")).sort();
 }
 
 export function getAllProviderSummaries(): ProviderSummary[] {
   const files = getAllProviderFiles();
   const map = new Map<string, ProviderSummary>();
-
   for (const file of files) {
     const raw = fs.readFileSync(path.join(PROVIDERS_DIR, file), "utf8");
     const { data, content } = matter(raw);
@@ -111,7 +104,6 @@ export function getAllProviderSummaries(): ProviderSummary[] {
       website: fm.website,
     });
   }
-
   const ordered: ProviderSummary[] = [];
   for (const slug of PROVIDER_ORDER) {
     const s = map.get(slug);
@@ -128,18 +120,14 @@ export async function getProviderBySlug(slug: string): Promise<ProviderArticle |
     const { raw } = readFile(slug);
     const headings: TocHeading[] = [];
     const { content: rawContentText } = matter(raw);
-
     const { content, frontmatter } = await compileMDX<ProviderFrontmatter>({
       source: raw,
       options: {
         parseFrontmatter: true,
-        mdxOptions: {
-          remarkPlugins: getCommonRemarkPlugins(headings),
-        },
+        mdxOptions: { remarkPlugins: getCommonRemarkPlugins(headings) },
       },
       components: reviewMdxComponents,
     });
-
     const fm = frontmatter as ProviderFrontmatter;
     const summary: ProviderSummary = {
       slug: fm.slug || slug,
@@ -155,7 +143,6 @@ export async function getProviderBySlug(slug: string): Promise<ProviderArticle |
       pricing: fm.pricing,
       website: fm.website,
     };
-
     return {
       ...summary,
       content,

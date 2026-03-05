@@ -66,7 +66,21 @@ export default function Footer() {
                 href="/buy-instagram-likes-followers"
                 onClick={(e) => handleNavClick(e, "/buy-instagram-likes-followers")}
               >
-                Instagram Likes
+                Buy Instagram
+              </Link>
+              <Link 
+                className="text-slate-800 text-sm font-medium leading-normal hover:bg-gray-100 transition-colors px-2 md:px-4 py-1.5 rounded-full" 
+                href="/buy-youtube-views-likes-comments"
+                onClick={(e) => handleNavClick(e, "/buy-youtube-views-likes-comments")}
+              >
+                Buy YouTube
+              </Link>
+              <Link 
+                className="text-slate-800 text-sm font-medium leading-normal hover:bg-gray-100 transition-colors px-2 md:px-4 py-1.5 rounded-full" 
+                href="/buy-twitter-likes-comments-followers"
+                onClick={(e) => handleNavClick(e, "/buy-twitter-likes-comments-followers")}
+              >
+                Buy Twitter
               </Link>
               <Link 
                 className="text-slate-800 text-sm font-medium leading-normal hover:bg-gray-100 transition-colors px-2 md:px-4 py-1.5 rounded-full" 
